@@ -1,0 +1,75 @@
+onClick={handleAddProduct(LivenProduct)}
+
+ const [CartItems, setCartItems] = useState([]);
+
+    const handleAddProduct = (product) => 
+    {
+      const ProductExist = CartItems.find((item) => item.id === product.id);
+      if(ProductExist)
+      {
+        setCartItems(CartItems.map((item) => item.id === product.id ?
+        {...ProductExist, quantity: ProductExist.quantity + 1} : item)
+        );
+      }
+      else
+      {
+        setCartItems([...CartItems,{...product, quantity:1}]);
+      }
+    }
+
+
+
+
+<Route path='/cart' element={<Cart cartItems={CartItems} handleAddProduct={handleAddProduct}/>} />
+
+
+
+
+
+
+
+import React  from 'react'
+
+const Cart = ({CartItems}) => {
+  return (
+    <div className='cart-items'>
+        <div className='cart-items-header'>
+            Cart Items
+        </div>
+        {CartItems.length === 0 && (
+            <div className='cart-items-empty'> No items are added </div>
+        )}
+        <div>
+            {CartItems.map((item) => (
+                <div key={item.id} className='cart-item-list'>
+                    <img 
+                    className='cart-items-image' 
+                    src={item.src} 
+                    /> 
+                </div>    
+            ))}
+        </div>
+    </div>
+  );
+};
+
+export default Cart;
+
+
+
+
+
+ {CartItems.length === 0 && (
+            <div className='cart-items-empty'> No items are added </div>
+        )}
+        <div>
+            {CartItems.map((item) => (
+                <div key={item.id} className='cart-item-list'>
+                    <img 
+                    className='cart-items-image' 
+                    src={item.src} 
+                    /> 
+                </div>    
+            ))}
+        </div>
+    </div>
